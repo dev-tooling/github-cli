@@ -25,7 +25,8 @@ jobs:
 
       - save_cache:
           paths:
-            - ./venv
+            - ./.venv
+            - ./.tox
           key: requirements-{{ checksum "setup.py" }}-{{ checksum "test-requirements.txt" }}
         
       - run:
