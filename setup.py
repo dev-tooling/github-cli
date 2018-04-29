@@ -33,7 +33,8 @@ setup(
     license='Apache License (2.0)',
     url='https://riverstone.io/',
     install_requires=[
-        'GitPython==2.1.9'
+        'GitPython==2.1.9',
+        'PyGithub==1.39'
     ],
     dependency_links=[],
     test_suite='tests',
