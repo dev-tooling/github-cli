@@ -1,0 +1,6 @@
+tox==3.0.0
+pytest==3.5.1
+pylint==1.8.4
+flake8==3.5.0
+coverage==4.5.1
+mock==2.0.0
