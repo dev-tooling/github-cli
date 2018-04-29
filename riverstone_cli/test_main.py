@@ -14,22 +14,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 '''
-from __future__ import print_function
+import sys
+from mock import patch
 
-from six import iteritems
-
-from riverstone_cli.commands.commands import COMMANDS
-from riverstone_cli.common.constants import PARSER
+from riverstone_cli.__main__ import main
 
 
-def main():
-    """Riverstone CLI main entry point.
+def test_main():
+    """ Unit test for Main function
     """
-    for (_, value) in iteritems(COMMANDS):
-        value.register_opts()
-    args = vars(PARSER.parse_args())
-    COMMANDS[args.get('commands')].handler(args)
-
-
-if __name__ == "__main__":
-    main()
+    testargs = ["rs", "issue", "start"]
+    with patch.object(sys, 'argv', testargs):
+        assert isinstance(main(), type(None))

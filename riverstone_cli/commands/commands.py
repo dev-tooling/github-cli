@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 '''
 Copyright 2018 Riverstone Software, LLC
 
@@ -14,22 +13,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 '''
-from __future__ import print_function
-
-from six import iteritems
-
-from riverstone_cli.commands.commands import COMMANDS
-from riverstone_cli.common.constants import PARSER
+from riverstone_cli.commands.issue.issue import IssueCommand
+from riverstone_cli.commands.wireframe.wireframe import WireframeCommand
 
 
-def main():
-    """Riverstone CLI main entry point.
-    """
-    for (_, value) in iteritems(COMMANDS):
-        value.register_opts()
-    args = vars(PARSER.parse_args())
-    COMMANDS[args.get('commands')].handler(args)
-
-
-if __name__ == "__main__":
-    main()
+COMMANDS = {
+    'issue': IssueCommand(),
+    'wireframe': WireframeCommand()
+}

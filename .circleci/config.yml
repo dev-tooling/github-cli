@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.1
+      
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - requirements-{{ checksum "setup.py" }}-{{ checksum "test-requirements.txt" }}
+          - requirements-
+
+      - run:
+          name: install dependencies
+          command: |
+            sudo pip install virtualenv
+            virtualenv .venv
+            source .venv/bin/activate
+            pip install -r requirements.txt
+            pip install -r test-requirements.txt
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: requirements-{{ checksum "setup.py" }}-{{ checksum "test-requirements.txt" }}
+        
+      - run:
+          name: run tests
+          command: |
+            source .venv/bin/activate
+            tox

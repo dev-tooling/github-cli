@@ -13,34 +13,26 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 '''
-from __future__ import print_function
-
-from riverstone_cli.commands.base import Command
+from riverstone_cli.common.utils import setup_subparser
 
 
-def _start():
-    pass
-
-
-def _stop():
-    pass
-
-
-class IssueCommand(Command):
-    """ IssueCommand class defines the subcommands and logic for issue related
-    tasks.
+class Command(object):
+    """Base class for all commands
     """
-    def __init__(self):
-        """Setup subparser and other attributes
-        """
-        self.name = "issue"
-        self.sub_commands = {
-            'start': _start,
-            'stop': _stop
-        }
+    name = None
+    sub_commands = []
+    subparser = None
 
     def handler(self, args):
-        """Handle issue commands.
+        """Handler for execution when command is issued
         """
-        sub_command = args['sub_command'].pop(0)
-        self.sub_commands.get(sub_command)()
+        pass
+
+    def register_opts(self):
+        """Initiate registration of options.
+        """
+        self.subparser = setup_subparser(
+            self.name,
+            'Wireframe related tasks.',
+            self.sub_commands
+        )

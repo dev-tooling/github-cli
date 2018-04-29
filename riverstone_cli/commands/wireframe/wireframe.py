@@ -15,21 +15,27 @@ limitations under the License.
 '''
 from __future__ import print_function
 
-from riverstone_cli.common.constants import SUBPARSER
+from riverstone_cli.commands.base import Command
 
-SUB_COMMANDS = [
-    'upload'
-]
 
-SUBPARSER = SUBPARSER.add_parser(
-    "wirefame",
-    help='Manage react based wireframes.'
-)
-SUBPARSER.add_argument(
-    'command',
-    metavar='command',
-    type=str,
-    nargs='+',
-    help='Which command to run. Options: %s' % ', '.join(SUB_COMMANDS),
-    choices=SUB_COMMANDS
-)
+def _upload():
+    pass
+
+
+class WireframeCommand(Command):
+    """WireframeCommand class defines the subcommands and logic for wireframe
+    related tasks.
+    """
+    def __init__(self):
+        """Setup subparser and other attributes
+        """
+        self.name = "wireframe"
+        self.sub_commands = {
+            'upload': _upload
+        }
+
+    def handler(self, args):
+        """Handle issue commands.
+        """
+        sub_command = args['sub_command'].pop(0)
+        self.sub_commands.get(sub_command)()
