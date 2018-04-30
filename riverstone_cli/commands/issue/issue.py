@@ -108,6 +108,10 @@ def _set_issue_labels(issue, labels):
     issue.set_labels(labels)
 
 
+def _remove_issue_labels(issue, labels):
+    issue.remove_from_labels(labels)
+
+
 def _start(args):
     issue_number = args.get('issue_number')
     github_repo = _get_github_repo()
@@ -132,8 +136,20 @@ def _start(args):
     _set_issue_labels(issue, 'WIP')
 
 
-def _stop(_):
-    pass
+def _stop(args):
+    issue_number = args.get('issue_number')
+    github_repo = _get_github_repo()
+    if not github_repo:
+        print("Repo not found")
+        return
+    issue = _get_issue(github_repo, issue_number)
+    if not issue:
+        print("Issue not found")
+        return
+    print('Removing WIP label from issue')
+    _remove_issue_labels(issue, 'WIP')
+    print('Adding RFR label to issue')
+    _set_issue_labels(issue, 'RFR')
 
 
 class IssueCommand(Command):
