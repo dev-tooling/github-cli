@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 import argparse
+from os import environ
+
+from github import Github
 
 PARSER = argparse.ArgumentParser(
     description='''Riverstone CLI is a command line utility for Riverstone
@@ -22,3 +25,5 @@ PARSER = argparse.ArgumentParser(
 )
 
 SUBPARSER = PARSER.add_subparsers(dest="commands")
+
+GITHUB = Github(environ.get('RSCLI_GITHUB_KEY'))

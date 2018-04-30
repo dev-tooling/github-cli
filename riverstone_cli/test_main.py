@@ -15,14 +15,38 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 import sys
-from mock import patch
+from mock import patch, MagicMock
 
+from riverstone_cli.commands.base import Command
 from riverstone_cli.__main__ import main
+
+
+class MockCommand(Command):
+    """MockCommand for testing
+    """
+    def __init__(self):
+        """Setup subparser and other attributes
+        """
+        self.name = "test"
+        self.sub_commands = {
+            'hello': MagicMock(),
+        }
+
+    def handler(self, args):
+        """Handle issue commands.
+        """
+        sub_command = args['sub_command'].pop(0)
+        self.sub_commands.get(sub_command)(args)
 
 
 def test_main():
     """ Unit test for Main function
     """
-    testargs = ["rs", "issue", "start"]
+    mock_commands = {
+        "test": MockCommand()
+    }
+
+    testargs = ["rs", "test", "hello"]
     with patch.object(sys, 'argv', testargs):
-        assert isinstance(main(), type(None))
+        with patch('riverstone_cli.__main__.COMMANDS', mock_commands):
+            assert isinstance(main(), type(None))
