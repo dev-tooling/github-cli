@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 setup(
     name='riverstone_cli',
-    version='0.0.3',
+    version='0.0.4',
     description=('Riverstone CLI for Riverstone employees.'),
     author='Riverstone Software, LLC',
     author_email='info@riverstone.io',
@@ -41,6 +41,6 @@ setup(
     zip_safe=False,
     include_package_data=True,
     packages=find_packages(exclude=['setuptools', 'tests']),
-    scripts=['bin/rs'],
+    scripts=['bin/rsc'],
     entry_points={}
 )
