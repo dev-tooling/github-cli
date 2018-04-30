@@ -36,3 +36,8 @@ class Command(object):
             'Wireframe related tasks.',
             self.sub_commands
         )
+
+        self._register_opts()
+
+    def _register_opts(self):
+        pass
