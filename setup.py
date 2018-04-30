@@ -25,8 +25,8 @@ from setuptools import find_packages
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 setup(
-    name='riverstone-cli',
-    version='0.0.1',
+    name='riverstone_cli',
+    version='0.0.3',
     description=('Riverstone CLI for Riverstone employees.'),
     author='Riverstone Software, LLC',
     author_email='info@riverstone.io',
