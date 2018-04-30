@@ -64,7 +64,7 @@ def _get_issue(github_repo, issue):
 
 
 def _generate_branch_name(issue_number, issue):
-    short_desc = issue.name
+    short_desc = issue.title
 
     if not short_desc:
         raise ValueError('Incorrect metadata')
