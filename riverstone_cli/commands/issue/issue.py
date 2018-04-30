@@ -63,23 +63,8 @@ def _get_issue(github_repo, issue):
         return None
 
 
-def _parse_issue_body(issue):
-    body = issue.body.splitlines()
-    metadata = {}
-
-    for line in body:
-        key, value = line.split(':')
-        key = key.strip()
-        value = value.strip()
-        key = key.replace(' ', '_')
-
-        metadata[key.lower()] = value
-
-    return metadata
-
-
-def _generate_branch_name(issue_number, issue_metadata):
-    short_desc = issue_metadata.get('short_description')
+def _generate_branch_name(issue_number, issue):
+    short_desc = issue.name
 
     if not short_desc:
         raise ValueError('Incorrect metadata')
@@ -122,11 +107,7 @@ def _start(args):
     if not issue:
         print("Issue not found")
         return
-    issue_metadata = _parse_issue_body(issue)
-    if not issue_metadata:
-        print("Issue metadata incomplete or non-existent")
-        return
-    branch_name = _generate_branch_name(issue_number, issue_metadata)
+    branch_name = _generate_branch_name(issue_number, issue)
     if not branch_name:
         print("Error generating branch name")
         return
