@@ -89,6 +89,10 @@ def _checkout_branch(name):
         git.checkout('HEAD', b=name)
 
 
+def _add_issue_labels(issue, labels):
+    issue.add_to_labels(labels)
+
+
 def _set_issue_labels(issue, labels):
     issue.set_labels(labels)
 
@@ -114,7 +118,7 @@ def _start(args):
     print('Checking out %s' % branch_name)
     _checkout_branch(branch_name)
     print('Adding WIP label to issue')
-    _set_issue_labels(issue, 'WIP')
+    _add_issue_labels(issue, 'WIP')
 
 
 def _stop(args):
@@ -130,7 +134,7 @@ def _stop(args):
     print('Removing WIP label from issue')
     _remove_issue_labels(issue, 'WIP')
     print('Adding RFR label to issue')
-    _set_issue_labels(issue, 'RFR')
+    _add_issue_labels(issue, 'RFR')
 
 
 class IssueCommand(Command):
