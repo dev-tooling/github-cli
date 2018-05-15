@@ -20,10 +20,16 @@ from github import Github
 
 PARSER = argparse.ArgumentParser(
     description='''Riverstone CLI is a command line utility for Riverstone
-    employees. This utility automates routenely used commands and
-    proceedures used at Riverstone.'''
+    employees. This utility automates routinely used commands and
+    procedures used at Riverstone.'''
 )
 
 SUBPARSER = PARSER.add_subparsers(dest="commands")
 
 GITHUB = Github(environ.get('RSCLI_GITHUB_KEY'))
+
+
+LABELS = {
+    'RFR': 'RFR',
+    'WIP': 'WIP'
+}

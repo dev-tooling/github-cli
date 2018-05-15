@@ -18,10 +18,10 @@ import os
 
 from git import Repo
 from git.exc import InvalidGitRepositoryError
-from github.GithubException import UnknownObjectException
+from github.GithubException import UnknownObjectException, GithubException
 
 from riverstone_cli.commands.base import Command
-from riverstone_cli.common.constants import GITHUB
+from riverstone_cli.common.constants import GITHUB, LABELS
 
 
 def _get_repo():
@@ -118,7 +118,9 @@ def _start(args):
     print('Checking out %s' % branch_name)
     _checkout_branch(branch_name)
     print('Adding WIP label to issue')
-    _add_issue_labels(issue, 'WIP')
+    _add_issue_labels(issue, LABELS['WIP'])
+    if LABELS['RFR'] in issue.labels:
+        _remove_issue_labels(issue, LABELS['RFR'])
 
 
 def _stop(args):
@@ -132,9 +134,13 @@ def _stop(args):
         print("Issue not found")
         return
     print('Removing WIP label from issue')
-    _remove_issue_labels(issue, 'WIP')
+    try:
+        _remove_issue_labels(issue, LABELS['WIP'])
+    except GithubException:
+        # if label doesn't exist, carry on
+        pass
     print('Adding RFR label to issue')
-    _add_issue_labels(issue, 'RFR')
+    _add_issue_labels(issue, LABELS['RFR'])
 
 
 class IssueCommand(Command):
