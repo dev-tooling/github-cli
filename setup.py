@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 setup(
     name='riverstone_cli',
-    version='0.0.4',
+    version='0.0.5',
     description=('Riverstone CLI for Riverstone employees.'),
     author='Riverstone Software, LLC',
     author_email='info@riverstone.io',
@@ -34,7 +34,8 @@ setup(
     url='https://riverstone.io/',
     install_requires=[
         'GitPython==2.1.9',
-        'PyGithub==1.39'
+        'PyGithub==1.39',
+        'six==1.11.0'
     ],
     dependency_links=[],
     test_suite='tests',
