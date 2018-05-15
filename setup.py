@@ -34,7 +34,8 @@ setup(
     url='https://riverstone.io/',
     install_requires=[
         'GitPython==2.1.9',
-        'PyGithub==1.39'
+        'PyGithub==1.39',
+        'six==1.11.0'
     ],
     dependency_links=[],
     test_suite='tests',
