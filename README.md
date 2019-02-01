@@ -1,7 +1,11 @@
-# Riverstone CLI
-Riverstone CLI helps Riverstone employees by automating common tasks and
-procedures. You should feel free to improve, extend, and enhance this tool as
-you see fit.
+# Github CLI Tool
+Tool for automating common git tasks and procedures.
+Feel free to improve, extend, and enhance this tool.
+
+## Code Source
+This is a copy of the Riverstone CLI tool (Apache License 2.0) forked on 15 May 2018.
+It has since diverged and is independently maintained under the same license.
+
 
 ## Commands
 * -h - Show the help menu
